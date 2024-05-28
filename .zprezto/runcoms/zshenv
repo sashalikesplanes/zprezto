@@ -1,0 +1,52 @@
+#
+# Defines environment variables.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Ensure that a non-login, non-interactive shell has a defined environment.
+if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
+
+# Add commonly used folders to $PATH
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# Path for homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+ 
+# Path for GOBIN
+export PATH="$HOME/go/bin:$PATH"
+export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# Specify default editor. Possible values: vim, nano, ed etc.
+export EDITOR=nvim
+
+# Rust
+export RUSTC_WRAPPER=/opt/homebrew/opt/sccache/bin/sccache
+
+export PATH="/Users/sasha/.rustup/toolchains/esp/xtensa-esp-elf/esp-13.2.0_20230928/xtensa-esp-elf/bin:$PATH"
+export LIBCLANG_PATH="/Users/sasha/.rustup/toolchains/esp/xtensa-esp32-elf-clang/esp-16.0.4-20231113/esp-clang/lib"
+
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
+
+# Example aliases
+alias g='git'
+alias v='nvim'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias tf="terraform"
+alias gac="git add . && git commit -m"
+alias gi="git init && gac 'Initial commit'"
+alias gp="git push" # + remote & branch names
+alias gl="git pull" # + remote & branch names
+alias gb="git branch" # + branch name
+alias gc="git checkout" # + branch name
+alias gcb="git checkout -b" # + branch name
+alias gsw="git switch" # + branch name
+alias gs="git status"
+
+export TF_DEV=true
+. "$HOME/.cargo/env"
